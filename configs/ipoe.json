@@ -1,0 +1,21 @@
+{
+  "interfaces": {
+    "access": [
+      {
+        "interface": "eth1",
+        "type": "ipoe",
+        "outer-vlan": 100,
+        "vlan-mode": "N:1"
+      }
+    ]
+  },
+
+  "sessions": {
+    "count": 8
+  },
+
+  "dhcp": {
+    "enable": true,
+    "broadcast": true
+  }
+}
