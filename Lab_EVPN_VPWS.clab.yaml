@@ -1,0 +1,30 @@
+name: BNG_EVPN_VPWS
+topology:
+  kinds:
+    nokia_srsim:
+      license: /home/jesusdavid/Licenses/SR_SIM25_1.txt
+      image: localhost/nokia/srsim:25.10.R2
+    linux:
+      image: ghcr.io/asadarafat/bngblaster:latest
+  nodes:
+    BNG1:
+      kind: nokia_srsim
+      type: sr-1
+    BNG2:
+      kind: nokia_srsim
+      type: sr-1
+    PE1:
+      kind: nokia_srsim
+      type: sr-1
+    BNGBlaster:
+      kind: linux
+      entrypoint: /bin/bash
+      binds:
+        - /home/jesusdavid/SROS/BNG/Lab_EVPN_VPWS/configs:/configs
+
+  links:
+    # # DATA LINKS
+    - endpoints: [ "PE1:1/1/c1/1", "BNGBlaster:eth1" ]
+    - endpoints: [ "BNG1:1/1/c1/1", "PE1:1/1/c2/1" ]
+    - endpoints: [ "BNG2:1/1/c1/1", "PE1:1/1/c3/1" ]
+    - endpoints: [ "BNG1:1/1/c3/1", "BNG2:1/1/c3/1" ]
